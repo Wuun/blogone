@@ -1,6 +1,7 @@
 package conf
 
 import (
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
@@ -8,13 +9,13 @@ import (
 var MYSQL_CONNECT *gorm.DB
 
 func init() {
-	var(
+	var (
 		err error
 	)
-	conf := newConf()
-	sqlAdr := conf.MSUser + ":" + conf.MSPWD + "@/" + conf.MSDBName + "?charset=utf8&parseTime=True&loc=Local"
+	sqlAdr := G_CONF.MSUser + ":" + G_CONF.MSPWD + "@/" + G_CONF.MSDBName + "?charset=utf8&parseTime=True&loc=Local"
 	MYSQL_CONNECT, err = gorm.Open("mysql", sqlAdr)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("connect MySQL successfully.")
 }

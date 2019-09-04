@@ -1,6 +1,7 @@
 package serializer
 
-type Response struct{
-	Code int
+//Response is the response serialization of http.Response.Body
+type Response struct {
+	Code    int
 	Content interface{}
 }
