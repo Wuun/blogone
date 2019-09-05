@@ -7,6 +7,7 @@ import (
 
 func main() {
 	router := gin.Default()
+	router.LoadHTMLGlob("./static*")
 	group := router.Group("/v1/article", nil)
 	{
 		group.GET("/article_list", api.ListArticle)

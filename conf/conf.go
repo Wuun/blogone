@@ -9,15 +9,13 @@ import (
 var G_CONF *Conf
 
 type Conf struct {
-	MaxConnected     int
-	ConnectTimeout   time.Duration
-	MSHost           string
-	MSPWD            string
-	MSPort           string
-	MSDBName         string
-	MSUser           string
-	MSListArtQuery   string
-	MSGetArtConQuery string
+	MaxConnected   int
+	ConnectTimeout time.Duration
+	MSHost         string
+	MSPWD          string
+	MSPort         string
+	MSDBName       string
+	MSUser         string
 }
 
 func init() {
@@ -30,8 +28,6 @@ func newConf() *Conf {
 	port := os.Getenv("MYSQL_PORT")
 	dbName := os.Getenv("MYSQL_DB_NAME")
 	user := os.Getenv("MYSQL_USER")
-	liArQuery := os.Getenv("LIST_ARTICLE_QUERY")
-	getArConQuery := os.Getenv("GET_ART_CON_QUERY")
 	if host == "" {
 		host = "127.0.0.1"
 	}
@@ -40,12 +36,10 @@ func newConf() *Conf {
 	}
 
 	return &Conf{
-		MSHost:           host,
-		MSPWD:            pwd,
-		MSPort:           port,
-		MSDBName:         dbName,
-		MSUser:           user,
-		MSListArtQuery:   liArQuery,
-		MSGetArtConQuery: getArConQuery,
+		MSHost:   host,
+		MSPWD:    pwd,
+		MSPort:   port,
+		MSDBName: dbName,
+		MSUser:   user,
 	}
 }

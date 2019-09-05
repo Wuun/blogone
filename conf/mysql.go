@@ -20,4 +20,6 @@ func init() {
 	}
 	fmt.Println("connect MySQL successfully.")
 	service.AutoCreateDatabaseSrv()
+	MYSQL_CONNECT.DB().SetMaxIdleConns(10)
+	MYSQL_CONNECT.DB().SetMaxOpenConns(20)
 }
