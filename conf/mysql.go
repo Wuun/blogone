@@ -1,6 +1,7 @@
 package conf
 
 import (
+	"blogone/service"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
@@ -18,4 +19,5 @@ func init() {
 		panic(err)
 	}
 	fmt.Println("connect MySQL successfully.")
+	service.AutoCreateDatabaseSrv()
 }

@@ -1,21 +1,19 @@
 package serializer
 
 import (
-	"time"
+	"github.com/jinzhu/gorm"
 )
 
-//Article is the gorm model of article
-type Article struct {
-	CreateTime time.Time `json:"create_time"`
-	Title      string    `json:"title"`
-	Content    string    `json:"content"`
-}
-
-type ArticleList struct {
+//ArticleModel is the gorm model of article
+type ArticleModel struct {
+	gorm.Model
+	Tag   string `json:"tag"`
 	Title string `json:"title"`
-	Tag   []Tag  `json:"tag"`
 }
 
-type Tag struct {
-	ArticleTag string `json:"article_tag"`
+//ArticleContent is the gorm model of article`s content
+type ArticleContent struct {
+	ArtModel   ArticleModel `json:"art_model"`
+	ArtModelID uint         `json:"art_model_id"`
+	Content    string       `gorm:"type:text;" json:"content"`
 }
