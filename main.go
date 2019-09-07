@@ -1,20 +1,8 @@
 package main
 
-import (
-	"blogone/api"
-	"github.com/gin-gonic/gin"
-)
+import "blogone/router"
 
 func main() {
-	router := gin.Default()
-	router.LoadHTMLGlob("./static*")
-	group := router.Group("/v1/article", nil)
-	{
-		group.GET("/article_list", api.ListArticle)
-		group.GET("/article_content/:article_id", api.GetArticleContent)
-	}
-	err := router.Run("127.0.0.1:8948")
-	if err != nil {
-		panic(err)
-	}
+	router := router.NewRouter()
+	router.Run("127.0.0.1:8948")
 }

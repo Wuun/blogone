@@ -20,6 +20,7 @@ type Conf struct {
 
 func init() {
 	G_CONF = newConf()
+	initMySQL()
 }
 
 func newConf() *Conf {
