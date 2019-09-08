@@ -4,13 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/conf/mysql.go" line="22" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="752b1689-c2ac-487d-b2ea-44698939d9d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/getArticleContentController.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/getArticleContentController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/getArticleContentModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/getArticleContentModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/listArticleModel.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/getArticleContentService.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/getArticleContentService.go" afterDir="false" />
-    </list>
+    <list default="true" id="752b1689-c2ac-487d-b2ea-44698939d9d0" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/getArticleContentService.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="342">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#17#72#0" expanded="true" />
               </folding>
@@ -106,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/getArticleContentModel.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="18">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -296,9 +290,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="566" y="0" width="1435" height="1119" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2701525" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2701525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -311,7 +304,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32894737" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3263158" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32624114" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32894737" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -349,7 +342,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;start&quot;" />
     <MESSAGE value="&quot;add list article job and get article specific content job&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;add list article job and get article specific content job&quot;" />
+    <MESSAGE value="&quot;let it behave like MVC&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;let it behave like MVC&quot;" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -554,8 +548,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/getArticleContentModel.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="18">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
@@ -571,8 +565,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service/getArticleContentService.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="342">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#17#72#0" expanded="true" />
           </folding>
