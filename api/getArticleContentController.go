@@ -1,7 +1,7 @@
 package api
 
 import (
-	"blogone/model"
+	"blogone/service"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
@@ -15,7 +15,7 @@ func GetArticleContent(ctx *gin.Context) {
 			"reason": "请输入正确的文章ID",
 		})
 	}
-	result, err := model.GetarticleContentModel(intArticleID)
+	result, err := service.GetarticleContentSrv(intArticleID)
 	if err != nil {
 		ctx.JSON(400, gin.H{
 			"err":    err,
