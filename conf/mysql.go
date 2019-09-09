@@ -19,16 +19,21 @@ func initMySQL() {
 		panic(err)
 	}
 	fmt.Println("connect MySQL successfully.")
-	AutoCreateDatabaseSrv()
+	Migrate()
 	MYSQL_CONNECT.DB().SetMaxIdleConns(10)
 	MYSQL_CONNECT.DB().SetMaxOpenConns(100)
 }
 
-func AutoCreateDatabaseSrv() {
+func Migrate() {
 	if err := MYSQL_CONNECT.AutoMigrate(&serializer.ArticleModel{}).Error; err != nil {
 		panic("error,when try to create table")
 	}
 	if err := MYSQL_CONNECT.AutoMigrate(&serializer.ArticleContent{}).Error; err != nil {
+		fmt.Println("error,when try to migrate databases.")
+		panic(err)
+	}
+	if err := MYSQL_CONNECT.AutoMigrate(&serializer.Comment{}).Error; err != nil {
+		fmt.Println("error,when try to migrate databases.")
 		panic(err)
 	}
 }

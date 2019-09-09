@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func GetarticleContentSrv(articleId int) (result []byte, err error) {
+func GetarticleContentSrv(articleId string) (result []byte, err error) {
 	var (
 		articleContent serializer.ArticleContent
 	)

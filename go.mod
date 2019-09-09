@@ -18,6 +18,7 @@ require (
 	github.com/josharian/impl v0.0.0-20190715203526-f0d59e96e372 // indirect
 	github.com/karrick/godirwalk v1.10.12 // indirect
 	github.com/mdempsky/gocode v0.0.0-20190203001940-7fb65232883f // indirect
+	github.com/pborman/uuid v1.2.0
 	github.com/ramya-rao-a/go-outline v0.0.0-20181122025142-7182a932836a // indirect
 	github.com/rogpeppe/godef v1.1.1 // indirect
 	github.com/skratchdot/open-golang v0.0.0-20190402232053-79abb63cd66e // indirect

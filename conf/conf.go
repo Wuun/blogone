@@ -16,6 +16,8 @@ type Conf struct {
 	MSPort         string
 	MSDBName       string
 	MSUser         string
+	WebsitePassWord string
+	WebAddr 	string
 }
 
 func init() {
@@ -29,6 +31,9 @@ func newConf() *Conf {
 	port := os.Getenv("MYSQL_PORT")
 	dbName := os.Getenv("MYSQL_DB_NAME")
 	user := os.Getenv("MYSQL_USER")
+	webPW := os.Getenv("WEBSITE_PASS_WORD")
+	webAddr := os.Getenv("WEB_ADDR")
+
 	if host == "" {
 		host = "127.0.0.1"
 	}
@@ -36,11 +41,16 @@ func newConf() *Conf {
 		port = "3306"
 	}
 
+	if webAddr == "" {
+		webAddr = "127.0.0.1:8948"
+	}
 	return &Conf{
 		MSHost:   host,
 		MSPWD:    pwd,
 		MSPort:   port,
 		MSDBName: dbName,
 		MSUser:   user,
+		WebsitePassWord:webPW,
+		WebAddr:webAddr,
 	}
 }
