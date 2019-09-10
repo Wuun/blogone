@@ -1,8 +1,8 @@
 package main
 
 import (
-	"blogone/conf"
-	"blogone/router"
+	"bblog/conf"
+	"bblog/router"
 )
 
 func main() {

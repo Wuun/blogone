@@ -2,22 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>articleList</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <title>BBLOG,WELCOME!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
+<style>
+    body,html,* {
+        padding: 0px;
+        margin: 0px;
+    }
+    #banner {
+        text-align: left;
+        font-size: 3.5em;
+        color: #8f8f8f;
+        margin-top: 0.5em;
+        padding: 0px;
+    }
+    #welcome{
+        font-size: 1.5em;
+        color: #d6d6d6;
+        padding: 0px;
+        margin-bottom: 1.5em;
+    }
+
+    #can_not_find {
+        padding: 0px;
+    }
+
+    .display-4:hover {
+        cursor: pointer;
+    }
+
+</style>
 <body>
-    <div class="container">
-        <ul class="row">
-            {{ range . }}
-                <li class="col-md-12 article-title" article-id="{{ .ID }}">{{ .Title }}</li>
-                <hr>
-            {{ else }}
-                <h1>can't find article.</h1>
-            {{ end }}
-        </ul>
-    </div>
+<div class="container">
+    <ul class="row">
+        <h1 class="offset-md-2 col-md-8 col-sm-12" id="banner">BBLOG</h1>
+        <h3 class="offset-md-2 col-md-8 col-sm-12" id="welcome">welcome!</h3>
+
+        {{ range . }}
+            <div class="jumbotron jumbotron-fluid col-md-8 offset-md-2">
+                <div class="container">
+                    <h1 class="display-4" onclick="getArticleContent()"  article-id="{{ .UUID }}">{{ .Title }}</h1>
+                    <p class="lead">{{ .Description }}</p>
+                </div>
+            </div>
+            <hr>
+        {{ else }}
+            <h1 class="offset-md-2 col-md-8 col-sm-12" id="can_not_find">can't find article.</h1>
+        {{ end }}
+    </ul>
+</div>
 </body>
+<script>
+    function getArticleContent() {
+        articleID = event.target.getAttribute("article-id")
+        url = "http://127.0.0.1:8948/api/v1/article_content/" + articleID
+        window.open(url,"_blank")
+        console.log(url)
+    }
+</script>
 </html>

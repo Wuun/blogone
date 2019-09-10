@@ -1,19 +1,38 @@
 package service
 
 import (
-	"blogone/conf"
-	"blogone/serializer"
+	"bblog/conf"
+	"bblog/serializer"
 	"log"
 )
 
-func GetarticleContentSrv(articleId string) (result []byte, err error) {
-	var (
-		articleContent serializer.ArticleContent
-	)
-	if err = conf.MYSQL_CONNECT.Find(&articleContent, articleId).Error; err != nil {
-		log.Print(err)
-		return result, err
-	}
+type ArticleContentSrv struct {
+	Title    string
+	Content  string
+	Comments []serializer.Comment
+}
 
-	return []byte(articleContent.Content), nil
+func (artContentResp *ArticleContentSrv) GetContent(articleId string) (err error) {
+	var (
+		content  serializer.ArticleContent
+		article  serializer.ArticleModel
+		comments []serializer.Comment
+	)
+
+	if err = conf.MYSQL_CONNECT.Where("article_model_id = ?", articleId).Find(&content).Error; err != nil {
+		log.Print(err)
+		return err
+	}
+	if err = conf.MYSQL_CONNECT.Where("uuid = ?", articleId).Find(&article).Error; err != nil {
+		log.Print(err)
+		return
+	}
+	if err = conf.MYSQL_CONNECT.Where("article_id = ?", articleId).Find(&comments).Error; err != nil {
+		log.Print(err)
+		return
+	}
+	artContentResp.Content = content.Content
+	artContentResp.Title = article.Title
+	artContentResp.Comments = comments
+	return
 }

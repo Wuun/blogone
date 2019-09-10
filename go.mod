@@ -1,4 +1,4 @@
-module blogone
+module bblog
 
 go 1.12
 

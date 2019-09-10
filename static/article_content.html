@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{{ .Title }}</title>
+</head>
+<style>
+    .title {
+        margin-top: 0.9em;
+        margin-bottom: 0.9em;
+        text-align: center;
+    }
+
+    .content {
+        margin:3em 0 ;
+        line-height: 1.5em;
+        font-size: 17px;
+        color: #424242;
+        background: #f2f0ee;
+    }
+
+    .alert{
+        align-items: center;
+    }
+
+    .comment-head{
+        margin-top: 2em;
+        font-size: 22px;
+        color: #95999c;
+        margin-bottom: 2em;
+    }
+
+    .footer {
+        height: 4em;
+        width: 100%;
+    }
+
+</style>
+<body>
+<div class="container">
+    <div>
+        <h1 class="title col-md-12">{{ .Title }}</h1>
+        <hr class="col-md-12">
+        <div class="col-md-12">
+            <div class="alert alert-light content" role="alert">
+                {{ .Content }}
+            </div>
+        </div>
+        <hr class="col-md-12">
+
+
+    </div>
+
+    <div class="col-md-12">
+        <h3 class="comment-head">COMMENTS:</h3>
+        {{ range .Comments }}
+            <div class="alert alert-info col-md-10 offset-md-1" role="alert">
+                <h4 class="alert-heading">{{ .Author }}：</h4>
+                <p>{{ .Text }}</p>
+            </div>
+        {{ else }}
+            <div class="alert alert-dark col-md-10 offset-md-1" role="alert">
+                No comment yet,anything you want to say?
+            </div>
+        {{ end }}
+    </div>
+
+    <div class="row">
+        <h3 class="comment-head col-md-12">ADD YOUR COMMENT</h3>
+        <div class="col-md-10 offset-md-1">
+            <div class="form-group">
+                <label for="nickname">Nickname:</label>
+                <input type="text" class="form-control" id="nickname" placeholder="input you nickname,please.">
+            </div>
+            <div class="form-group">
+                <label for="comment">Input comment:</label>
+                <textarea class="form-control" id="comment" rows="4"></textarea>
+            </div>
+            <button type="button" class="btn btn-outline-secondary" onclick="comment()">Submit</button>
+            <div aria-live="polite" aria-atomic="true" style="position: absolute;top: 16.5em;right: 42em;">
+                <div class="toast">
+                    <div class="toast-header" id="toast-1">
+                        <strong class="mr-auto">comment succeffully!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <div class="footer"></div>
+</div>
+</body>
+<script>
+    function comment() {
+        user_nickname = document.getElementById("nickname").value
+        user_comment = document.getElementById("comment").value
+        href = window.location.href
+        articleid = href.split("/")[6]
+        url = "http://127.0.0.1:8948/api/v1/comment/"+articleid
+        axios.post(url, {
+            "nickname": user_nickname,
+            "comment": user_comment
+        }).then(function (response) {
+            if (response.data.Status == 0){
+                $(".toast").toast("show")
+                window.location.reload()
+            }
+        }).catch(function (error) {
+        });
+    }
+</script>
+</html>
