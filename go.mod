@@ -10,6 +10,7 @@ require (
 	github.com/bydmm/giligili v0.0.1 // indirect
 	github.com/davidrjenni/reftools v0.0.0-20190827201643-0605d60846fb // indirect
 	github.com/fatih/gomodifytags v1.0.1 // indirect
+	github.com/gin-contrib/sessions v0.0.1
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect

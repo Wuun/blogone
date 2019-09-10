@@ -18,6 +18,8 @@ type Conf struct {
 	MSUser         string
 	WebsitePassWord string
 	WebAddr 	string
+	Secret string
+	Domain string
 }
 
 func init() {
@@ -33,7 +35,8 @@ func newConf() *Conf {
 	user := os.Getenv("MYSQL_USER")
 	webPW := os.Getenv("WEBSITE_PASS_WORD")
 	webAddr := os.Getenv("WEB_ADDR")
-
+	secret := os.Getenv("WEB_SECRET")
+	domain := os.Getenv("WEB_DOMAIN")
 	if host == "" {
 		host = "127.0.0.1"
 	}
@@ -52,5 +55,7 @@ func newConf() *Conf {
 		MSUser:   user,
 		WebsitePassWord:webPW,
 		WebAddr:webAddr,
+		Secret:secret,
+		Domain:domain,
 	}
 }

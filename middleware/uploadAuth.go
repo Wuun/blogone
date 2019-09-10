@@ -2,20 +2,24 @@ package middleware
 
 import (
 	"bblog/conf"
-	"bblog/serializer"
+	"fmt"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"os"
 )
 
 func UploadAuth() gin.HandlerFunc {
-	return func(context *gin.Context) {
-		if context.Param("password") != conf.G_CONF.WebsitePassWord {
-			context.JSON(403, serializer.Response{
-				Status: 40003,
-				Msg:    "you are invaild",
-			})
-			context.Abort()
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+		pas := session.Get("password")
+		fmt.Println(os.Getenv("WEB_PASSWORD"))
+		if pas.(string) == os.Getenv("WEB_PASSWORD") {
+			c.Next()
 			return
 		}
-		context.Next()
+		loginPage := "http://" + conf.G_CONF.WebAddr + "/api/v1/login"
+		fmt.Println(pas.(string))
+		c.Redirect(200,loginPage)
+		c.Abort()
 	}
 }
