@@ -8,6 +8,7 @@ type Response struct {
 	Error  error
 }
 
+//BuildResponse is the fatory of response.
 func BuildResponse(code int, msg string, data interface{}, err error) *Response {
 	return &Response{
 		Status: code,

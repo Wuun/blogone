@@ -4,11 +4,12 @@ import (
 	"bblog/serializer"
 	"bblog/service"
 	"encoding/json"
-	"github.com/gin-gonic/gin"
 	"io/ioutil"
+
+	"github.com/gin-gonic/gin"
 )
 
-//list all article exist in the server.
+//ListArticle list all article exist in the server.
 func ListArticle(ctx *gin.Context) {
 	result, err := service.ListArticleSrv()
 	if err != nil {
@@ -18,7 +19,7 @@ func ListArticle(ctx *gin.Context) {
 	ctx.HTML(200, "article.html", result)
 }
 
-//get article content of specific article.
+//GetArticleContent get article content of specific article.
 func GetArticleContent(ctx *gin.Context) {
 	articleID := ctx.Param("article_id")
 	content := &service.ArticleContentSrv{}
@@ -31,7 +32,7 @@ func GetArticleContent(ctx *gin.Context) {
 	ctx.HTML(200, "article_content.html", content)
 }
 
-// this api is use to upload article
+//UploadArticle , this api is use to upload article
 func UploadArticle(ctx *gin.Context) {
 	uploadArticleSrv := service.UploadArticleSrv{}
 	body, err := ioutil.ReadAll(ctx.Request.Body)
@@ -56,12 +57,12 @@ func UploadArticle(ctx *gin.Context) {
 	ctx.JSON(200, resp)
 }
 
-//this api is use to direct to write article page.
+//WriteArticle this api is use to direct to write article page.
 func WriteArticle(c *gin.Context) {
 	c.HTML(200, "write_article.html", nil)
 }
 
-//set comment to article
+//CommentToArticle set comment to article
 func CommentToArticle(ctx *gin.Context) {
 	body, err := ioutil.ReadAll(ctx.Request.Body)
 	if err != nil {
@@ -69,6 +70,7 @@ func CommentToArticle(ctx *gin.Context) {
 			Status: 4001,
 			Msg:    "comment failed.",
 		})
+		return
 	}
 	commentReq := serializer.CommentRequest{}
 	err = json.Unmarshal(body, &commentReq)
@@ -77,12 +79,14 @@ func CommentToArticle(ctx *gin.Context) {
 			Status: 4001,
 			Msg:    "comment failed.",
 		})
+		return
 	}
 	if commentReq.Comment == "" || commentReq.Nickname == "" {
 		ctx.JSON(200, &serializer.Response{
 			Status: 4001,
 			Msg:    "comment failed.",
 		})
+		return
 	}
 	comment := service.ArticleCommentSrv{
 		ArticleID: ctx.Param("article_id"),

@@ -5,21 +5,22 @@ import (
 	"time"
 )
 
-//Conf is config will be used.
+//G_CONF is config will be used.
 var G_CONF *Conf
 
+//Conf is conf
 type Conf struct {
-	MaxConnected   int
-	ConnectTimeout time.Duration
-	MSHost         string
-	MSPWD          string
-	MSPort         string
-	MSDBName       string
-	MSUser         string
+	MaxConnected    int
+	ConnectTimeout  time.Duration
+	MSHost          string
+	MSPWD           string
+	MSPort          string
+	MSDBName        string
+	MSUser          string
 	WebsitePassWord string
-	WebAddr 	string
-	Secret string
-	Domain string
+	WebAddr         string
+	Secret          string
+	Domain          string
 }
 
 func init() {
@@ -48,14 +49,14 @@ func newConf() *Conf {
 		webAddr = "127.0.0.1:8948"
 	}
 	return &Conf{
-		MSHost:   host,
-		MSPWD:    pwd,
-		MSPort:   port,
-		MSDBName: dbName,
-		MSUser:   user,
-		WebsitePassWord:webPW,
-		WebAddr:webAddr,
-		Secret:secret,
-		Domain:domain,
+		MSHost:          host,
+		MSPWD:           pwd,
+		MSPort:          port,
+		MSDBName:        dbName,
+		MSUser:          user,
+		WebsitePassWord: webPW,
+		WebAddr:         webAddr,
+		Secret:          secret,
+		Domain:          domain,
 	}
 }

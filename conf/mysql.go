@@ -3,10 +3,13 @@ package conf
 import (
 	"bblog/serializer"
 	"fmt"
+
+	//
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
 
+//MYSQL_CONNECT is singlten of mysql connection.
 var MYSQL_CONNECT *gorm.DB
 
 func initMySQL() {
@@ -24,6 +27,7 @@ func initMySQL() {
 	MYSQL_CONNECT.DB().SetMaxOpenConns(100)
 }
 
+//Migrate is auto magirate table of server.
 func Migrate() {
 	if err := MYSQL_CONNECT.AutoMigrate(&serializer.ArticleModel{}).Error; err != nil {
 		panic("error,when try to create table")

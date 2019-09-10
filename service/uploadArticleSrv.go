@@ -3,9 +3,11 @@ package service
 import (
 	"bblog/conf"
 	"bblog/serializer"
+
 	"github.com/pborman/uuid"
 )
 
+//UploadArticleSrv is the set of mathods of upload article.
 type UploadArticleSrv struct {
 	Title       string `form:"title";json:"title"`
 	Tag         string `form:"tag";json:"tag"`
@@ -13,6 +15,7 @@ type UploadArticleSrv struct {
 	Content     string `form:"content";json:"content"`
 }
 
+//Upload use to upload article.
 func (service *UploadArticleSrv) Upload() *serializer.Response {
 	if service.Description == "" || service.Title == "" || service.Content == "" {
 		return &serializer.Response{
