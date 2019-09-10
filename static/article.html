@@ -33,6 +33,13 @@
         cursor: pointer;
     }
 
+    .jumbotron {
+        border-radius: 0.8em;
+    }
+
+    .card {
+        border-radius: 0.9rem;
+    }
 </style>
 <body>
 <div class="container">
@@ -51,9 +58,19 @@
         {{ else }}
             <h1 class="offset-md-2 col-md-8 col-sm-12" id="can_not_find">can't find article.</h1>
         {{ end }}
+
+        <div class="card offset-md-2 col-md-4 " style="">
+            <div class="card-body">
+                <h5 class="card-title">Write Article</h5>
+                <p class="card-text">write article with password,if you have the right.</p>
+                <a href="http://127.0.0.1:8948/api/v1/write_article/" class="btn btn-info">Go</a>
+            </div>
+        </div>
     </ul>
+
 </div>
 </body>
+
 <script>
     function getArticleContent() {
         articleID = event.target.getAttribute("article-id")

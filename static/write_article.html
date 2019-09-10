@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>upload article</title>
+</head>
+<style>
+    .footer {
+        height: 4em;
+        width: 100%;
+    }
+
+    #banner:hover{
+        cursor: pointer;
+    }
+
+    #banner {
+        text-align: left;
+        font-size: 3.5em;
+        color: #8f8f8f;
+        margin-top: 0.5em;
+        padding: 0px;
+    }
+
+    #welcome{
+        font-size: 1.5em;
+        color: #d6d6d6;
+        padding: 0px;
+        margin-bottom: 1.5em;
+    }
+
+</style>
+<body>
+<div class="container">
+
+    <div class="row" onclick="go_home()">
+        <h1 class="offset-md-1 col-md-8 col-sm-12" id="banner">BBLOG</h1>
+        <h3 class="offset-md-1 col-md-8 col-sm-12" id="welcome">welcome!</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input form="title" class="form-control" id="title" placeholder="input you title,please.">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input form="description" class="form-control" id="description" placeholder="input you description,please.">
+            </div>
+            <div class="form-group">
+                <label for="content">Input comment:</label>
+                <textarea form="content" class="form-control" id="content" rows="10"></textarea>
+            </div>
+            <div aria-live="polite" aria-atomic="true" style="position: absolute;right: 42em;">
+                <div class="toast">
+                    <div class="toast-header" id="toast-1">
+                        <strong class="mr-auto" id="toast-message"></strong>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-secondary" onclick="upload()">Submit</button>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+</div>
+</body>
+<script>
+    function upload() {
+        title = document.getElementById("title").value
+        description = document.getElementById("description").value
+        content = document.getElementById("content").value
+        console.log(content)
+        url = "http://127.0.0.1:8948/api/v1/write_article/upload_article"
+        axios.post(url, {
+            "title": title,
+            "description": description,
+            "content":content
+        }).then(function (response) {
+            console.log(response.data.Status)
+            if (response.data.Status == 0){
+                document.getElementById("toast-message").innerText="upload successfully."
+                $(".toast").toast("show")
+            }else{
+                document.getElementById("toast-message").innerText="upload failed."
+                $(".toast").toast("show")
+            }
+        }).catch(function (error) {
+        });
+    }
+
+    function go_home() {
+        window.location.assign("http://127.0.0.1:8948/api/v1/article_list")
+    }
+</script>
+</html>

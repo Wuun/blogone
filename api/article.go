@@ -4,7 +4,6 @@ import (
 	"bblog/serializer"
 	"bblog/service"
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 )
@@ -22,7 +21,6 @@ func ListArticle(ctx *gin.Context) {
 //get article content of specific article.
 func GetArticleContent(ctx *gin.Context) {
 	articleID := ctx.Param("article_id")
-	fmt.Println(articleID)
 	content := &service.ArticleContentSrv{}
 	err := content.GetContent(articleID)
 	if err != nil {
@@ -33,19 +31,34 @@ func GetArticleContent(ctx *gin.Context) {
 	ctx.HTML(200, "article_content.html", content)
 }
 
-//write article into mysql.
-func WriteArticle(ctx *gin.Context) {
+// this api is use to upload article
+func UploadArticle(ctx *gin.Context) {
 	uploadArticleSrv := service.UploadArticleSrv{}
-	err := ctx.ShouldBind(uploadArticleSrv)
+	body, err := ioutil.ReadAll(ctx.Request.Body)
 	if err != nil {
-		ctx.JSON(200, gin.H{
-			"status": "4002",
-			"msg":    "can't not write article to server.",
+		ctx.JSON(200, serializer.Response{
+			Status: 40001,
+			Msg:    "error when get your data.",
+			Error:  err,
+		})
+		return
+	}
+	err = json.Unmarshal(body, &uploadArticleSrv)
+	if err != nil {
+		ctx.JSON(200, serializer.Response{
+			Status: 40001,
+			Msg:    "error when unmarshal your data.",
+			Error:  err,
 		})
 		return
 	}
 	resp := uploadArticleSrv.Upload()
 	ctx.JSON(200, resp)
+}
+
+//this api is use to direct to write article page.
+func WriteArticle(c *gin.Context) {
+	c.HTML(200, "write_article.html", nil)
 }
 
 //set comment to article
@@ -60,6 +73,12 @@ func CommentToArticle(ctx *gin.Context) {
 	commentReq := serializer.CommentRequest{}
 	err = json.Unmarshal(body, &commentReq)
 	if err != nil {
+		ctx.JSON(200, &serializer.Response{
+			Status: 4001,
+			Msg:    "comment failed.",
+		})
+	}
+	if commentReq.Comment == "" || commentReq.Nickname == "" {
 		ctx.JSON(200, &serializer.Response{
 			Status: 4001,
 			Msg:    "comment failed.",

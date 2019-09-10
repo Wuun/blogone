@@ -15,9 +15,10 @@ func NewRouter() *gin.Engine {
 		group.GET("/article_list", api.ListArticle)
 		group.GET("/article_content/:article_id", api.GetArticleContent)
 		group.POST("/comment/:article_id", api.CommentToArticle)
-		uploadPage := group.Group("/article_upload")
+		uploadPage := group.Group("/write_article")
 		uploadPage.Use(middleware.UploadAuth())
-		uploadPage.POST("/:password", api.WriteArticle)
+		uploadPage.GET("/", api.WriteArticle)
+		uploadPage.POST("/upload_article", api.UploadArticle)
 	}
 
 	return router

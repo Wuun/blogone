@@ -11,15 +11,28 @@
     <title>{{ .Title }}</title>
 </head>
 <style>
+    #banner {
+        text-align: left;
+        font-size: 2.5em;
+        color: #8f8f8f;
+        margin-top: 0.5em;
+        margin-left: 0;
+        padding: 0px;
+    }
+
+    #banner:hover{
+        cursor: pointer;
+    }
+
     .title {
-        margin-top: 0.9em;
+        margin-top: 0.5em;
         margin-bottom: 0.9em;
         text-align: center;
     }
 
     .content {
         margin:3em 0 ;
-        line-height: 1.5em;
+        line-height: 2.5em;
         font-size: 17px;
         color: #424242;
         background: #f2f0ee;
@@ -44,11 +57,15 @@
 </style>
 <body>
 <div class="container">
+    <div class="row">
+        <h1 class="offset-md-1 col-md-8 col-sm-12" id="banner" onclick="go_home()">BBLOG</h1>
+    </div>
+
     <div>
         <h1 class="title col-md-12">{{ .Title }}</h1>
         <hr class="col-md-12">
         <div class="col-md-12">
-            <div class="alert alert-light content" role="alert">
+            <div class="alert alert-light content text" role="alert">
                 {{ .Content }}
             </div>
         </div>
@@ -58,11 +75,11 @@
     </div>
 
     <div class="col-md-12">
-        <h3 class="comment-head">COMMENTS:</h3>
+        <h3 class="comment-head">COMMENTS&nbsp;&nbsp;<span class="badge badge-dark">{{ .CommentCount }}</span>&nbsp;:</h3>
         {{ range .Comments }}
             <div class="alert alert-info col-md-10 offset-md-1" role="alert">
                 <h4 class="alert-heading">{{ .Author }}：</h4>
-                <p>{{ .Text }}</p>
+                <p class="">{{ .Text }}</p>
             </div>
         {{ else }}
             <div class="alert alert-dark col-md-10 offset-md-1" role="alert">
@@ -82,14 +99,16 @@
                 <label for="comment">Input comment:</label>
                 <textarea class="form-control" id="comment" rows="4"></textarea>
             </div>
-            <button type="button" class="btn btn-outline-secondary" onclick="comment()">Submit</button>
+{{/*    tosat*/}}
             <div aria-live="polite" aria-atomic="true" style="position: absolute;top: 16.5em;right: 42em;">
                 <div class="toast">
                     <div class="toast-header" id="toast-1">
-                        <strong class="mr-auto">comment succeffully!</strong>
+                        <strong class="mr-auto" id="toast-message"></strong>
                     </div>
                 </div>
             </div>
+
+            <button type="button" class="btn btn-outline-secondary" onclick="comment()">Submit</button>
         </div>
         </div>
     </div>
@@ -110,11 +129,19 @@
             "comment": user_comment
         }).then(function (response) {
             if (response.data.Status == 0){
+                document.getElementById("toast-message").innerText="comment succeffully."
                 $(".toast").toast("show")
                 window.location.reload()
+            }else {
+                document.getElementById("toast-message").innerText="comment failed."
+                $(".toast").toast("show")
             }
         }).catch(function (error) {
         });
+    }
+
+    function go_home() {
+        window.location.assign("http://127.0.0.1:8948/api/v1/article_list")
     }
 </script>
 </html>

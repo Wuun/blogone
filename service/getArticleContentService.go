@@ -7,9 +7,10 @@ import (
 )
 
 type ArticleContentSrv struct {
-	Title    string
-	Content  string
-	Comments []serializer.Comment
+	Title        string
+	Content      string
+	Comments     []serializer.Comment
+	CommentCount int
 }
 
 func (artContentResp *ArticleContentSrv) GetContent(articleId string) (err error) {
@@ -34,5 +35,6 @@ func (artContentResp *ArticleContentSrv) GetContent(articleId string) (err error
 	artContentResp.Content = content.Content
 	artContentResp.Title = article.Title
 	artContentResp.Comments = comments
+	artContentResp.CommentCount = len(comments)
 	return
 }
