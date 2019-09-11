@@ -1,0 +1,42 @@
+#banner {
+    text-align: left;
+    font-size: 2.5em;
+    color: #8f8f8f;
+    margin-top: 0.5em;
+    margin-left: 0;
+    padding: 0px;
+}
+
+#banner:hover{
+    cursor: pointer;
+}
+
+.title {
+    margin-top: 0.5em;
+    margin-bottom: 0.9em;
+    text-align: center;
+}
+
+.content {
+    margin:3em 0 ;
+    line-height: 2.5em;
+    font-size: 17px;
+    color: #424242;
+    background: #f2f0ee;
+}
+
+.alert{
+    align-items: center;
+}
+
+.comment-head{
+    margin-top: 2em;
+    font-size: 22px;
+    color: #95999c;
+    margin-bottom: 2em;
+}
+
+.footer {
+    height: 4em;
+    width: 100%;
+}

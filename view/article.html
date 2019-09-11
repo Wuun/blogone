@@ -3,44 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>BBLOG,WELCOME!</title>
+    <link rel="shortcut icon" href="http://127.0.0.1:8948/api/v1/static/favicon.ico"  type="image/x-icon" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://127.0.0.1:8948/api/v1/static/css/article.css">
 </head>
 <style>
-    body,html,* {
-        padding: 0px;
-        margin: 0px;
-    }
-    #banner {
-        text-align: left;
-        font-size: 3.5em;
-        color: #8f8f8f;
-        margin-top: 0.5em;
-        padding: 0px;
-    }
-    #welcome{
-        font-size: 1.5em;
-        color: #d6d6d6;
-        padding: 0px;
-        text-align: center;
-        margin-bottom: 1.5em;
-    }
-
-    #can_not_find {
-        padding: 0px;
-    }
-
-    .display-4:hover {
-        cursor: pointer;
-    }
-
-    .jumbotron {
-        border-radius: 0.8em;
-    }
-
-    .card {
-        border-radius: 0.9rem;
-    }
 </style>
 <body>
 <div class="container">
@@ -48,7 +16,7 @@
         <h1 class="offset-md-2 col-md-8 col-sm-12" id="banner">BBLOG</h1>
         <h3 class="offset-md-2 col-md-2 col-sm-12" id="welcome">welcome!!!</h3>
 
-        {{ range . }}
+        {{ range .ArticleSet }}
             <div class="jumbotron jumbotron-fluid col-md-8 offset-md-2">
                 <div class="container">
                     <h1 class="display-4" onclick="getArticleContent()"  article-id="{{ .UUID }}">{{ .Title }}</h1>
@@ -60,7 +28,7 @@
             <h1 class="offset-md-2 col-md-8 col-sm-12" id="can_not_find">can't find article.</h1>
         {{ end }}
 
-        <div class="card offset-md-2 col-md-4 " style="">
+        <div class="card offset-md-2 col-md-8 ">
             <div class="card-body">
                 <h5 class="card-title">Write Article</h5>
                 <p class="card-text">write article with password,if you have the right.</p>
@@ -68,7 +36,20 @@
             </div>
         </div>
     </ul>
+    <div class="row justify-content-md-center">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                {{ range .Page }}
+                <button type="button" class="btn btn-secondary" onclick="changePage()">{{ . }}</button>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer">
 
+        </div>
+    </footer>
 </div>
 </body>
 
@@ -78,6 +59,12 @@
         url = "http://127.0.0.1:8948/api/v1/article_content/" + articleID
         window.open(url,"_blank")
         console.log(url)
+    }
+    function changePage(){
+        rawOffset = event.target.innerHTML
+        offset = (rawOffset-1) * 4
+        url = "http://127.0.0.1:8948/api/v1/home?offset=" + offset
+        window.location.assign(url)
     }
 </script>
 </html>

@@ -1,0 +1,14 @@
+#banner {
+    text-align: center;
+    font-size: 3.5em;
+    color: #8f8f8f;
+    margin-top: 20%;
+    padding: 0px;
+}
+#banner:hover{
+    cursor: pointer;
+}
+
+.form-control{
+    width: 10em;
+}

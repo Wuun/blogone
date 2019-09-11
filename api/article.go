@@ -5,18 +5,29 @@ import (
 	"bblog/service"
 	"encoding/json"
 	"io/ioutil"
+	"os"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 //ListArticle list all article exist in the server.
 func ListArticle(ctx *gin.Context) {
-	result, err := service.ListArticleSrv()
+	hpSrv := service.HomePageServ{}
+	limit, err := strconv.Atoi(os.Getenv("WEB_LIMIT"))
 	if err != nil {
-		ctx.String(200, "string", "服务器错误")
-		return
+		hpSrv.SetLimit(4)
+	} else {
+		hpSrv.SetLimit(limit)
 	}
-	ctx.HTML(200, "article.html", result)
+	rawOffset := ctx.Query("offset")
+	offset, err := strconv.Atoi(rawOffset)
+	if err != nil {
+		offset = 0
+	}
+	hpSrv.SetOffset(offset)
+	hpSrv.List()
+	ctx.HTML(200, "article.html", hpSrv)
 }
 
 //GetArticleContent get article content of specific article.
