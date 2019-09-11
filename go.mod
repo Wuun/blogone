@@ -7,6 +7,7 @@ require (
 	github.com/Wuun/giligili v0.0.1 // indirect
 	github.com/acroca/go-symbols v0.1.1 // indirect
 	github.com/alecthomas/gometalinter v3.0.0+incompatible // indirect
+	github.com/broqiang/mdblog v1.1.0 // indirect
 	github.com/bydmm/giligili v0.0.1 // indirect
 	github.com/davidrjenni/reftools v0.0.0-20190827201643-0605d60846fb // indirect
 	github.com/fatih/gomodifytags v1.0.1 // indirect
@@ -19,6 +20,7 @@ require (
 	github.com/josharian/impl v0.0.0-20190715203526-f0d59e96e372 // indirect
 	github.com/karrick/godirwalk v1.10.12 // indirect
 	github.com/mdempsky/gocode v0.0.0-20190203001940-7fb65232883f // indirect
+	github.com/microcosm-cc/bluemonday v1.0.2 // indirect
 	github.com/pborman/uuid v1.2.0
 	github.com/ramya-rao-a/go-outline v0.0.0-20181122025142-7182a932836a // indirect
 	github.com/rogpeppe/godef v1.1.1 // indirect
