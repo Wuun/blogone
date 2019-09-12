@@ -20,7 +20,6 @@ func NewRouter() *gin.Engine {
 		group.POST("/authenticate", api.Authenticate)
 		group.GET("/ping", api.Ping)
 		group.GET("/home", api.ListArticle)
-		group.POST("/home", api.ListArticle)
 		group.GET("/article_content/:article_id", api.GetArticleContent)
 		group.POST("/comment/:article_id", api.CommentToArticle)
 

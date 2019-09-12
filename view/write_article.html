@@ -1,56 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!doctype html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <link rel="shortcut icon" href="http://127.0.0.1:8948/api/v1/static/favicon.ico"  type="image/x-icon" >
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="http://127.0.0.1:8948/api/v1/static/js/axios.min.js"></script>
+    <script src="http://127.0.0.1:8948/api/v1/static/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="http://127.0.0.1:8948/api/v1/static/css/bootstrap.min.css">
+    <script src="http://127.0.0.1:8948/api/v1/static/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://127.0.0.1:8948/api/v1/static/css/article_content.css">
+    <script src="http://127.0.0.1:8948/api/v1/static/js/showdown.min.js"></script>
     <link rel="stylesheet" href="http://127.0.0.1:8948/api/v1/static/css/write_article.css">
-    <title>upload article</title>
 </head>
 <style>
 </style>
+</head>
+<body>
 <body>
 <div class="container">
+    <ul class="row">
+        <h1 class="offset-md-1 col-md-8 col-sm-12" id="banner" onclick="go_home()">BBLOG</h1>
+        <h3 class="offset-md-1 col-md-8 col-sm-12 welcome" id="welcome">welcome!</h3>
+    </ul>
+</div>
 
-    <div class="row" onclick="go_home()">
-        <h1 class="offset-md-1 col-md-8 col-sm-12" id="banner">BBLOG</h1>
-        <h3 class="offset-md-1 col-md-8 col-sm-12" id="welcome">welcome!</h3>
-    </div>
-
-    <div class="row">
-        <div class="col-md-10 offset-md-1">
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input form="title" class="form-control" id="title" placeholder="input you title,please.">
-            </div>
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <input form="description" class="form-control" id="description" placeholder="input you description,please.">
-            </div>
-            <div class="form-group">
-                <label for="content">Input comment:</label>
-                <textarea form="content" class="form-control" id="content" rows="10"></textarea>
-            </div>
-            <div aria-live="polite" aria-atomic="true" style="position: absolute;right: 42em;">
-                <div class="toast">
-                    <div class="toast-header" id="toast-1">
-                        <strong class="mr-auto" id="toast-message"></strong>
+<div class="all">
+    <div class="left">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="form-group">
+                    <label for="title" class="title">Title:</label>
+                    <input form="title" class="form-control" id="title" placeholder="input you title,please.">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input form="description" class="form-control" id="description" placeholder="input you description,please.">
+                </div>
+                <div class="form-group">
+                    <label for="content">Input Article:</label>
+                    <textarea form="content" class="form-control" id="content" rows="12"></textarea>
+                </div>
+                <button type="button" class="btn btn-outline-secondary" id="upload-btn" onclick="upload()">Submit</button>
+                <div aria-live="polite" aria-atomic="true">
+                    <div class="toast">
+                        <div class="toast-header" id="toast-1">
+                            <strong class="mr-auto" id="toast-message"></strong>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-outline-secondary" onclick="upload()">Submit</button>
         </div>
     </div>
 
-    <div class="footer"></div>
+
+    <div class="right">
+        <div class="show">
+            <h1 class="display display-header">预览区域</h1>
+            <hr>
+            <div id="show-content" class="display"></div>
+        </div>
+    </div>
+
 </div>
 </body>
+
+</body>
 <script>
+    interval = setInterval(function () {
+        var converter = new showdown.Converter();
+        var text      = document.getElementById("content").value,
+            html      = converter.makeHtml(text);
+        console.log(text)
+        document.getElementById("show-content").innerHTML = html
+    },100)
+    interval()
+
     function upload() {
         title = document.getElementById("title").value
         description = document.getElementById("description").value
@@ -66,6 +90,8 @@
             if (response.data.Status == 0){
                 document.getElementById("toast-message").innerText="upload successfully."
                 $(".toast").toast("show")
+                document.getElementById("upload-btn").classList.add("disabled")
+                document.getElementById("upload-btn").removeAttribute("onclick")
             }else{
                 document.getElementById("toast-message").innerText="upload failed."
                 $(".toast").toast("show")

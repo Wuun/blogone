@@ -1,10 +1,6 @@
-.footer {
-    height: 4em;
-    width: 100%;
-}
-
-#banner:hover{
-    cursor: pointer;
+* {
+    margin: 0px;
+    padding: 0px;
 }
 
 #banner {
@@ -15,9 +11,47 @@
     padding: 0px;
 }
 
-#welcome{
+#banner:hover {
+    cursor: pointer;
+}
+
+.welcome{
     font-size: 1.5em;
     color: #d6d6d6;
     padding: 0px;
     margin-bottom: 1.5em;
+}
+
+.all{
+    display: flex;
+}
+
+.left,.right{
+    width: 50%;
+    float: left;
+    height: 100vh;
+    padding-top: 2em;
+    /*background-color: #eeecea;*/
+    border: #eeecea 1px solid;
+    border-radius: 0.9em;
+}
+
+.right {
+    overflow-y: scroll;
+}
+
+.right::-webkit-scrollbar {
+    display: none;
+}
+
+.display {
+    padding-left: 2.5em;
+}
+
+.display-header {
+    font-size: 1.5em;
+    color: #9b9b9b;
+}
+.toast {
+    margin-top: 1em;
 }
