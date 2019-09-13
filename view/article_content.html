@@ -17,7 +17,8 @@
 <body>
 <div class="container">
     <div class="row">
-        <h1 class="offset-md-1 col-md-8 col-sm-12" id="banner" onclick="go_home()">BBLOG</h1>
+        <h1 class="offset-md-1 col-md-11 col-sm-12" id="banner" onclick="go_home()">BBLOG</h1>
+        <button type="button" class="btn btn-warning offset-md-1 col-md-1 col-sm-12" style="height: 3rem;width: 5rem;border-radius: 1.6rem;margin: auto 0" onclick="go_modify_page()">Modify</button>
     </div>
 
     <div>
@@ -81,11 +82,12 @@
         text =  document.getElementById("text").innerHTML,
         html      = converter.makeHtml(text);
     document.getElementById("text").innerHTML = html
+
+    href = window.location.href
+    articleid = href.split("/")[6]
     function comment() {
         user_nickname = document.getElementById("nickname").value
         user_comment = document.getElementById("comment").value
-        href = window.location.href
-        articleid = href.split("/")[6]
         url = "http://127.0.0.1:8948/api/v1/comment/"+articleid
         axios.post(url, {
             "nickname": user_nickname,
@@ -105,6 +107,12 @@
 
     function go_home() {
         window.location.assign("http://127.0.0.1:8948/api/v1/home")
+    }
+
+    function go_modify_page() {
+        url = "http://127.0.0.1:8948/api/v1/write_article/modify_article_page/"+articleid
+        console.log(url)
+        window.open(url,"_blank")
     }
 </script>
 </html>

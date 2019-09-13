@@ -15,7 +15,7 @@ func NewRouter() *gin.Engine {
 	group := router.Group("/api/v1")
 	group.Use(middleware.Session(conf.G_CONF.Secret))
 	{
-		group.StaticFS("/static",http.Dir("./view"))
+		group.StaticFS("/static", http.Dir("./view"))
 		group.GET("/login", api.Login)
 		group.POST("/authenticate", api.Authenticate)
 		group.GET("/ping", api.Ping)
@@ -23,11 +23,13 @@ func NewRouter() *gin.Engine {
 		group.GET("/article_content/:article_id", api.GetArticleContent)
 		group.POST("/comment/:article_id", api.CommentToArticle)
 
-		authen := group.Group("write_article/")
-		authen.Use(middleware.UploadAuth())
+		authn := group.Group("write_article/")
+		authn.Use(middleware.UploadAuth())
 		{
-			authen.GET("write", api.WriteArticle)
-			authen.POST("upload_article", api.UploadArticle)
+			authn.GET("write", api.WriteArticle)
+			authn.POST("upload_article", api.UploadArticle)
+			authn.GET("modify_article_page/:article_id", api.ModifyInformationPage)
+			authn.POST("modify_article/:article_id", api.ModifyArticle)
 		}
 	}
 

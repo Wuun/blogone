@@ -106,3 +106,66 @@ func CommentToArticle(ctx *gin.Context) {
 	}
 	ctx.JSON(200, comment.Add())
 }
+
+func ModifyInformationPage(c *gin.Context) {
+	var (
+		modify service.ModifyArticleSrv
+	)
+	id := c.Param("article_id")
+	if id == "" {
+		c.JSON(200, serializer.Response{
+			Status: 40001,
+			Msg:    "can't find article.error-1",
+		})
+		return
+	}
+
+	err := modify.FindInformation(id)
+	if err != nil {
+		c.JSON(200, serializer.Response{
+			Status: 40001,
+			Msg:    "can't find article.error-2",
+		})
+		return
+	}
+
+	c.HTML(200, "modify_article.html", modify)
+}
+
+func ModifyArticle(c *gin.Context) {
+	var (
+		modify service.ModifyArticleSrv
+	)
+	id := c.Query("article_id")
+	body, err := ioutil.ReadAll(c.Request.Body)
+	defer c.Request.Body.Close()
+	if err != nil {
+		c.JSON(200, serializer.Response{
+			Status: 40001,
+			Error:  err,
+		})
+		return
+	}
+
+	err = json.Unmarshal(body, &modify)
+	if err != nil {
+		c.JSON(200, serializer.Response{
+			Status: 40001,
+			Error:  err,
+		})
+		return
+	}
+	err = modify.Modify(id)
+	if err != nil || modify.Content == "" || modify.Title == "" || modify.Description == "" {
+		c.JSON(200, serializer.Response{
+			Status: 40001,
+			Msg:    "modify failed.",
+		})
+		return
+	}
+
+	c.JSON(200, serializer.Response{
+		Status: 0,
+		Msg:    "modify successfully.",
+	})
+}

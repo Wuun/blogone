@@ -15,7 +15,6 @@ func UploadAuth() gin.HandlerFunc {
 		loginPage := "http://" + conf.G_CONF.WebAddr + "/api/v1/login"
 		session := sessions.Default(c)
 		pas := session.Get("password")
-		fmt.Println(os.Getenv("WEB_PASSWORD"))
 		if pas != nil {
 			if pas.(string) == os.Getenv("WEB_PASSWORD") {
 				c.Next()
