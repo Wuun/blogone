@@ -23,13 +23,13 @@ func NewRouter() *gin.Engine {
 		group.GET("/article_content/:article_id", api.GetArticleContent)
 		group.POST("/comment/:article_id", api.CommentToArticle)
 
-		authn := group.Group("write_article/")
-		authn.Use(middleware.UploadAuth())
+		auth := group.Group("write_article/")
+		auth.Use(middleware.Auth())
 		{
-			authn.GET("write", api.WriteArticle)
-			authn.POST("upload_article", api.UploadArticle)
-			authn.GET("modify_article_page/:article_id", api.ModifyInformationPage)
-			authn.POST("modify_article/:article_id", api.ModifyArticle)
+			auth.GET("write", api.WriteArticle)
+			auth.POST("upload_article", api.UploadArticle)
+			auth.GET("modify_article_page/:article_id", api.ModifyInformationPage)
+			auth.POST("modify_article/:article_id", api.ModifyArticle)
 		}
 	}
 

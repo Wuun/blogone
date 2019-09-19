@@ -28,12 +28,12 @@
 
 .left,.right{
     width: 50%;
-    float: left;
+    /*float: left;*/
     height: 100vh;
     padding-top: 2em;
-    /*background-color: #eeecea;*/
+    background-color: #eeecea;
     border: #eeecea 1px solid;
-    border-radius: 0.9em;
+    /*border-radius: 0.9em;*/
 }
 
 .right {

@@ -5,12 +5,14 @@ import (
 	"bblog/serializer"
 )
 
+//ModifyArticleSrv is use to modify article.
 type ModifyArticleSrv struct {
 	Title       string
 	Description string
 	Content     string
 }
 
+//FindInformation is ues to get information to modify.
 func (modSrv *ModifyArticleSrv) FindInformation(articleID string) error {
 	var (
 		articleModel   serializer.ArticleModel
@@ -29,6 +31,7 @@ func (modSrv *ModifyArticleSrv) FindInformation(articleID string) error {
 	return nil
 }
 
+//Modify is ued to mosify article.
 func (modSrv *ModifyArticleSrv) Modify(articleID string) error {
 	var (
 		articleModel   serializer.ArticleModel

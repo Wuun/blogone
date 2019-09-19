@@ -107,6 +107,7 @@ func CommentToArticle(ctx *gin.Context) {
 	ctx.JSON(200, comment.Add())
 }
 
+//ModifyInformationPage let us to get into the page for modifying article.
 func ModifyInformationPage(c *gin.Context) {
 	var (
 		modify service.ModifyArticleSrv
@@ -132,6 +133,7 @@ func ModifyInformationPage(c *gin.Context) {
 	c.HTML(200, "modify_article.html", modify)
 }
 
+//ModifyArticle is an api for update article information.
 func ModifyArticle(c *gin.Context) {
 	var (
 		modify service.ModifyArticleSrv

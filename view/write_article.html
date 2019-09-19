@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="http://127.0.0.1:8948/api/v1/static/css/article_content.css">
     <script src="http://127.0.0.1:8948/api/v1/static/js/showdown.min.js"></script>
     <link rel="stylesheet" href="http://127.0.0.1:8948/api/v1/static/css/write_article.css">
+    <script src="http://127.0.0.1:8948/api/v1/static/js/markdown-it.min.js"></script>
 </head>
 <style>
 </style>
@@ -67,13 +68,13 @@
 </body>
 <script>
     interval = setInterval(function () {
-        var converter = new showdown.Converter();
-        var text      = document.getElementById("content").value,
-            html      = converter.makeHtml(text);
-        console.log(text)
-        document.getElementById("show-content").innerHTML = html
-    },100)
-    interval()
+        // var converter = new showdown.Converter();
+        var text      = document.getElementById("content").value;
+        //     html      = converter.makeHtml(text);
+        var md = window.markdownit();
+        var result = md.render(text);
+        document.getElementById("show-content").innerHTML = result
+    },200)
 
     function upload() {
         title = document.getElementById("title").value
